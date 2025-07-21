@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Role\Enums\Permission;
 use Modules\Settings\Http\Controllers\SettingsController;
 
 /*
@@ -14,6 +15,17 @@ use Modules\Settings\Http\Controllers\SettingsController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('settings', SettingsController::class)->names('settings');
+Route::apiResource('settings', SettingsController::class, [
+    'only' => ['index'],
+]);
+
+/**
+ * *****************************************
+ * Authorized Route for Super Admin only
+ * *****************************************
+ */
+Route::group(['middleware' => ['permission:'.Permission::SUPER_ADMIN, 'auth:sanctum']], function (): void {
+    Route::apiResource('settings', SettingsController::class, [
+        'only' => ['store'],
+    ]);
 });
