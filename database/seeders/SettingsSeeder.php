@@ -21,6 +21,7 @@ class SettingsSeeder extends Seeder
     {
         // run your app seeder
         DB::table('settings')->insert([
+            'id' => Str::uuid(),
             'options' => json_encode([
                 "seo" => [
                     'ogImage' => null,
