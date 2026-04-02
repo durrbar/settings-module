@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Settings\Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -12,7 +14,7 @@ class SettingsDatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            SettingsSeeder::class
+            SettingsSeeder::class,
         ]);
     }
 }

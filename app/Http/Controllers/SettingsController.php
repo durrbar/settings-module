@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Settings\Http\Controllers;
 
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -104,7 +107,7 @@ class SettingsController extends CoreController
     {
         try {
             return $this->repository->first();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw new DurrbarException(NOT_FOUND);
         }
     }
@@ -122,9 +125,10 @@ class SettingsController extends CoreController
         $settings = $this->repository->first();
         if (isset($settings->id)) {
             return $this->repository->update($request->only(['options']), $settings->id);
-        } else {
-            return $this->repository->create(['options' => $request['options']]);
         }
+
+        return $this->repository->create(['options' => $request['options']]);
+
     }
 
     /**
