@@ -15,7 +15,7 @@ class Settings extends Model
 {
     use HasUuids;
 
-    public static function getData($language = DEFAULT_LANGUAGE)
+    public static function getData(string $language = DEFAULT_LANGUAGE): ?self
     {
         $data = self::where('language', $language)->first();
 
