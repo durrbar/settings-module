@@ -15,7 +15,7 @@ class SettingsRepository extends BaseRepository
     /**
      * Configure the Model
      **/
-    public function model()
+    public function model(): string
     {
         return Settings::class;
     }
