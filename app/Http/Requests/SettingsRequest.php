@@ -15,7 +15,7 @@ class SettingsRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -25,14 +25,14 @@ class SettingsRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'options' => ['required', 'array'],
         ];
     }
 
-    public function failedValidation(Validator $validator)
+    public function failedValidation(Validator $validator): void
     {
         throw new HttpResponseException(response()->json($validator->errors(), 422));
     }
